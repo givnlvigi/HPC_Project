@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "utils.h"
-#include "SequentialTarjan.h"
+#include "Tarjan.h"
 
 #define BUFFER_DIM sizeof(char)*((dim*2) + 3)
 
@@ -181,7 +181,7 @@ int main(int argc, char const *argv[])
 
     Graph test_graph; 
 
-    // test_generate_graph(10,"test1_file", 5, generate_graph);
+    test_generate_graph(10,"test1_file", 5, generate_graph);
 
     Graph expected_graph = graphCreate(5);
 
@@ -193,170 +193,170 @@ int main(int argc, char const *argv[])
 
     node0.outgoing_edges[0] = 1;
     node0.outgoing_edges[1] = 2;
-    addNode(&expected_graph, node0, 0);
+    addNode(&expected_graph, node0);
 
 
-    addNode(&expected_graph, node1, 2);
+    addNode(&expected_graph, node1);
 
-    addNode(&expected_graph, node2, 1);
+    addNode(&expected_graph, node2);
 
 
     node3.outgoing_edges[0] = 0;
     node3.outgoing_edges[1] = 1;
     node3.outgoing_edges[2] = 2;
     node3.outgoing_edges[3] = 3;
-    addNode(&expected_graph, node3, 4);
+    addNode(&expected_graph, node3);
 
 
     node4.outgoing_edges[0] = 3;
     node4.outgoing_edges[1] = 4;
     node4.outgoing_edges[2] = 2;
-    addNode(&expected_graph, node4, 3);
+    addNode(&expected_graph, node4);
 
 
-    // test_init_from_file("test_init_file", &test_graph, &expected_graph, init_from_file);
+    test_init_from_file("test_init_file", &test_graph, &expected_graph, init_from_file);
 
     // graphDestroy(&test_graph);
-    graphDestroy(&expected_graph);
+    // graphDestroy(&expected_graph);
 
 
 
 
-    // Graph test_graph2 = graphCreate(10);
-    test_graph = graphCreate(10);
-    create_all_connected_graph(&test_graph);
+    // // Graph test_graph2 = graphCreate(10);
+    // test_graph = graphCreate(10);
+    // create_all_connected_graph(&test_graph);
 
 
 
-    // int n_partitions = 2; 
-    // int** expected_partition = malloc(sizeof(int*)*n_partitions);
-    // int* SCC1 = malloc(sizeof(int)*5);
-    // for (int i = 0; i < 5; i++)
+    // // int n_partitions = 2; 
+    // // int** expected_partition = malloc(sizeof(int*)*n_partitions);
+    // // int* SCC1 = malloc(sizeof(int)*5);
+    // // for (int i = 0; i < 5; i++)
+    // // {
+    // //     SCC1[i] = i; 
+    // // }
+    // // int* SCC2 = malloc(sizeof(int)*5);
+    // // for (int i = 0; i < 5; i++)
+    // // {
+    // //     SCC2[i] = i + 5; 
+    // // }
+    
+    
+    // // *expected_partition = SCC1; 
+    // // *expected_partition++;
+    // // *expected_partition = SCC2; 
+    // // *expected_partition--;
+
+    // // for (int i = 0; i < 2; i++)
+    // // {
+    // //     for (int i = 0; i < 5; i++)
+    // //     {
+    // //         printf("%d ", (*expected_partition)[i]);
+    // //     }
+    // //     expected_partition++;
+    // //     printf("\n");
+    // // }
+
+    // // SCCArray expected_SCC_partition = SCCArrayCreate(10);
+
+    // // SCCNode supernode = SCCNodeCreate();
+    // // nodeArrayAdd(&supernode.components, node_create(0,10));
+    // // nodeArrayAdd(&supernode.components, node_create(1,10));
+    // // nodeArrayAdd(&supernode.components, node_create(2,10));
+    // // nodeArrayAdd(&supernode.components, node_create(3,10));
+    // // nodeArrayAdd(&supernode.components, node_create(4,10));
+    // // nodeArrayAdd(&supernode.components, node_create(5,10));
+    // // nodeArrayAdd(&supernode.components, node_create(6,10));
+    // // nodeArrayAdd(&supernode.components, node_create(7,10));
+    // // nodeArrayAdd(&supernode.components, node_create(8,10));
+    // // nodeArrayAdd(&supernode.components, node_create(9,10));
+
+    // // SCCArrayAdd(expected_SCC_partition, )
+    
+    // // nodeArrayPrint(&supernode.components);
+
+    // int n_part = 1; 
+    // SCCNode* expected = (SCCNode*)malloc(sizeof(SCCNode)*n_part);
+    // *expected = SCCNodeCreate();
+    // nodeArrayAdd(&(*expected).components, node_create(0,10));
+    // nodeArrayAdd(&(*expected).components, node_create(1,10));
+    // nodeArrayAdd(&(*expected).components, node_create(2,10));
+    // nodeArrayAdd(&(*expected).components, node_create(3,10));
+    // nodeArrayAdd(&(*expected).components, node_create(4,10));
+    // nodeArrayAdd(&(*expected).components, node_create(5,10));
+    // nodeArrayAdd(&(*expected).components, node_create(6,10));
+    // nodeArrayAdd(&(*expected).components, node_create(7,10));
+    // nodeArrayAdd(&(*expected).components, node_create(8,10));
+    // nodeArrayAdd(&(*expected).components, node_create(9,10));
+
+
+    // // nodeArrayPrint(&(*expected).components);
+
+    // for (int i = 0; i < 10; i++)
     // {
-    //     SCC1[i] = i; 
-    // }
-    // int* SCC2 = malloc(sizeof(int)*5);
-    // for (int i = 0; i < 5; i++)
-    // {
-    //     SCC2[i] = i + 5; 
+    //     printf("%d ", nodeArrayGet(&(*expected).components, i).id);
     // }
     
-    
-    // *expected_partition = SCC1; 
-    // *expected_partition++;
-    // *expected_partition = SCC2; 
-    // *expected_partition--;
-
-    // for (int i = 0; i < 2; i++)
-    // {
-    //     for (int i = 0; i < 5; i++)
-    //     {
-    //         printf("%d ", (*expected_partition)[i]);
-    //     }
-    //     expected_partition++;
-    //     printf("\n");
-    // }
-
-    // SCCArray expected_SCC_partition = SCCArrayCreate(10);
-
-    // SCCNode supernode = SCCNodeCreate();
-    // nodeArrayAdd(&supernode.components, node_create(0,10));
-    // nodeArrayAdd(&supernode.components, node_create(1,10));
-    // nodeArrayAdd(&supernode.components, node_create(2,10));
-    // nodeArrayAdd(&supernode.components, node_create(3,10));
-    // nodeArrayAdd(&supernode.components, node_create(4,10));
-    // nodeArrayAdd(&supernode.components, node_create(5,10));
-    // nodeArrayAdd(&supernode.components, node_create(6,10));
-    // nodeArrayAdd(&supernode.components, node_create(7,10));
-    // nodeArrayAdd(&supernode.components, node_create(8,10));
-    // nodeArrayAdd(&supernode.components, node_create(9,10));
-
-    // SCCArrayAdd(expected_SCC_partition, )
-    
-    // nodeArrayPrint(&supernode.components);
-
-    int n_part = 1; 
-    SCCNode* expected = (SCCNode*)malloc(sizeof(SCCNode)*n_part);
-    *expected = SCCNodeCreate();
-    nodeArrayAdd(&(*expected).components, node_create(0,10));
-    nodeArrayAdd(&(*expected).components, node_create(1,10));
-    nodeArrayAdd(&(*expected).components, node_create(2,10));
-    nodeArrayAdd(&(*expected).components, node_create(3,10));
-    nodeArrayAdd(&(*expected).components, node_create(4,10));
-    nodeArrayAdd(&(*expected).components, node_create(5,10));
-    nodeArrayAdd(&(*expected).components, node_create(6,10));
-    nodeArrayAdd(&(*expected).components, node_create(7,10));
-    nodeArrayAdd(&(*expected).components, node_create(8,10));
-    nodeArrayAdd(&(*expected).components, node_create(9,10));
-
-
-    // nodeArrayPrint(&(*expected).components);
-
-    for (int i = 0; i < 10; i++)
-    {
-        printf("%d ", nodeArrayGet(&(*expected).components, i).id);
-    }
-    
 
 
 
 
-    int n_part2 = 4; 
-    SCCNode* expected2 = (SCCNode*)malloc(sizeof(SCCNode)*n_part2);
-    int* partition_sizes = (int*)malloc(sizeof(int)*n_part2);
+    // int n_part2 = 4; 
+    // SCCNode* expected2 = (SCCNode*)malloc(sizeof(SCCNode)*n_part2);
+    // int* partition_sizes = (int*)malloc(sizeof(int)*n_part2);
 
-    printf("expected2: %p partition_sizes: %p", expected2, partition_sizes);
+    // printf("expected2: %p partition_sizes: %p", expected2, partition_sizes);
 
-    *expected2 = SCCNodeCreate();
-    nodeArrayAdd(&(*expected2).components, node_create(0,10));
-    nodeArrayAdd(&(*expected2).components, node_create(1,10));
-    nodeArrayAdd(&(*expected2).components, node_create(2,10));
-    // partition_sizes[0] = 10;
-    *partition_sizes = 3; 
+    // *expected2 = SCCNodeCreate();
+    // nodeArrayAdd(&(*expected2).components, node_create(0,10));
+    // nodeArrayAdd(&(*expected2).components, node_create(1,10));
+    // nodeArrayAdd(&(*expected2).components, node_create(2,10));
+    // // partition_sizes[0] = 10;
+    // *partition_sizes = 3; 
 
-    printf("also before %d\n", *partition_sizes);
+    // printf("also before %d\n", *partition_sizes);
 
-    expected2++;
-    partition_sizes++;
+    // expected2++;
+    // partition_sizes++;
 
-    *expected2 = SCCNodeCreate();
-    nodeArrayAdd(&(*expected2).components, node_create(3,10));
-    nodeArrayAdd(&(*expected2).components, node_create(4,10));
-    nodeArrayAdd(&(*expected2).components, node_create(5,10));
-    // partition_sizes[1] = 11; 
-    *partition_sizes = 3; 
+    // *expected2 = SCCNodeCreate();
+    // nodeArrayAdd(&(*expected2).components, node_create(3,10));
+    // nodeArrayAdd(&(*expected2).components, node_create(4,10));
+    // nodeArrayAdd(&(*expected2).components, node_create(5,10));
+    // // partition_sizes[1] = 11; 
+    // *partition_sizes = 3; 
 
-    partition_sizes--;
-    printf("also before %d\n", *partition_sizes);
-    partition_sizes++;
-    
-
-    expected2++;
-    partition_sizes++;
-
-
-    *expected2 = SCCNodeCreate();
-    nodeArrayAdd(&(*expected2).components, node_create(6,10));
-    nodeArrayAdd(&(*expected2).components, node_create(7,10));
-    nodeArrayAdd(&(*expected2).components, node_create(8,10));
-    // partition_sizes[2] = 12;
-    *partition_sizes = 3; 
-
-    expected2++;
-    partition_sizes++;
-
-
-    *expected2 = SCCNodeCreate();
-    nodeArrayAdd(&(*expected2).components, node_create(9,10));
-    // partition_sizes[3] = 13; 
-    *partition_sizes = 1; 
-
-    expected2 = expected2-3;
-    // expected2--;
-    // expected2--;
-    partition_sizes = partition_sizes-3;
     // partition_sizes--;
-    // partition_sizes--;
+    // printf("also before %d\n", *partition_sizes);
+    // partition_sizes++;
+    
+
+    // expected2++;
+    // partition_sizes++;
+
+
+    // *expected2 = SCCNodeCreate();
+    // nodeArrayAdd(&(*expected2).components, node_create(6,10));
+    // nodeArrayAdd(&(*expected2).components, node_create(7,10));
+    // nodeArrayAdd(&(*expected2).components, node_create(8,10));
+    // // partition_sizes[2] = 12;
+    // *partition_sizes = 3; 
+
+    // expected2++;
+    // partition_sizes++;
+
+
+    // *expected2 = SCCNodeCreate();
+    // nodeArrayAdd(&(*expected2).components, node_create(9,10));
+    // // partition_sizes[3] = 13; 
+    // *partition_sizes = 1; 
+
+    // expected2 = expected2-3;
+    // // expected2--;
+    // // expected2--;
+    // partition_sizes = partition_sizes-3;
+    // // partition_sizes--;
+    // // partition_sizes--;
 
 
     // nodeArrayPrint(&(*expected2).components);
