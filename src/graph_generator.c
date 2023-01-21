@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
 
     int size = atoi(argv[1]);
     int n_threads = atoi(argv[2]);
-    int max_edges = 1;
+    int max_edges = 20;
 
     char filename[300];
 

@@ -175,11 +175,11 @@ void tree_communication(Graph *g,SCCStack * sccStack, int rank, int size, int *r
 
     if(rank == 0){
         TArray mpi_result = arrayCreate(0);
-        printf("sono il processo 0 questo è l'array risultato:\n");
+        // printf("sono il processo 0 questo è l'array risultato:\n");
         // SCCArrayPrint(&sccStack->a);
         makeMPIArray(sccStack,&mpi_result,rank);
-        printf("Number of elements of mpi_result: %d\n",mpi_result.items[0]); // n elementi
-        printf("SCC found: %d\n",mpi_result.items[1]); // n SCC trovati
+        // printf("Number of elements of mpi_result: %d\n",mpi_result.items[0]); // n elementi
+        // printf("SCC found: %d\n",mpi_result.items[1]); // n SCC trovati
         // arrayPrint(&mpi_result);    // ris stampato: [n_elementi] [n_SCC] [for n_SCC (n_components) (outgoing_edges) (c1 .. c_n_components)]
         makeSupernode(g,mpi_result.items,0);
     }
@@ -227,7 +227,7 @@ int main(int argc, char** argv){
     // char filename[20] = "INPUT_FILE";
     strcat(filename, file_index);   
 
-    printf("%s\n", filename);
+    // printf("%s\n", filename);
     
     SCCStack sccStack;
     sccStack = SCCStackCreate();
@@ -269,7 +269,7 @@ int main(int argc, char** argv){
 	MPI_Reduce(&write_time,&global_write_time,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
 
 	double global_elapsed = global_read_time + global_tarjan_time + global_write_time;
-	if(rank == 0) printf("%d,%.3f,%.3f,%.3f,%.3f\n",size, global_read_time, global_tarjan_time, global_write_time, global_elapsed);
+	if(rank == 0) printf("%d,%d,%.3f,%.3f,%.3f,%.3f\n",size, n_ranks, global_read_time, global_tarjan_time, global_write_time, global_elapsed);
 
     return_value = MPI_Finalize();
 

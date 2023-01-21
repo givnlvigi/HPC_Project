@@ -91,7 +91,7 @@ int main(int argc, char** argv){
 	double read_elapsed = (read_end_etime - read_start_etime) / (double) clktck;
 	double write_elapsed = (write_end_etime - write_start_etime) / (double) clktck;
 	double elapsed = tarjan_elapsed + read_elapsed + write_elapsed;
-	printf("%d,%.3f,%.3f,%.3f,%.3f\n",size,read_elapsed,tarjan_elapsed,write_elapsed,elapsed);	
+	printf("%d,%d,%.3f,%.3f,%.3f,%.3f\n",size,0,read_elapsed,tarjan_elapsed,write_elapsed,elapsed);	
 
     fclose(out_file);
     free(out_file_str);
