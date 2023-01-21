@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "Tarjan_sequential.h"
+#include "Tarjan.h"
 
 void SCC(Graph* g, SCCStack *sccStack){
     int size = g->V;                                // numero di nodi del grafo
@@ -65,7 +65,7 @@ void SCCUtil(Graph* g, Node* u,int* low,int* disc, bool* stackMember,NodeStack* 
         // printf("-----created supernode!\n");
         while(w.id != u->id){
             w = nodeStackPop(st);
-            printf("popped: %d\n", w.id);
+            // printf("popped: %d\n", w.id);
 
             g->adj[w.graph_index].stackMember = false; 
             nodeArrayAdd(&supernode.components, w); 

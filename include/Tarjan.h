@@ -1,5 +1,5 @@
-#ifndef TARJAN_SEQUENTIAL
-#define TARJAN_SEQUENTAL
+#ifndef TARJAN
+#define TARJAN
 
 #include "Grafo.h"
 #include "NodeStack.h"

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "Tarjan_sequential.h"
+#include "Tarjan.h"
 
 
 int main(int argc, char** argv){
