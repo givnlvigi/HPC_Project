@@ -253,7 +253,7 @@ void init_from_file(char* input_file, Graph* g){
             node.outgoing_edges[edge_counter] = edge; 
             edge_counter++; 
         }
-        addNode(g, node, index);
+        addNode(g, node);
         #ifdef DEBUG
         printf("\n");
         #endif
@@ -306,16 +306,16 @@ void create_all_connected_graph(Graph* g){
     set_all_outgoing_edges(&node8);
     set_all_outgoing_edges(&node9);
 
-    addNode(g, node0, 0);
-    addNode(g, node1, 1);
-    addNode(g, node2, 2);
-    addNode(g, node3, 3);
-    addNode(g, node4, 4);
-    addNode(g, node5, 5);
-    addNode(g, node6, 6);
-    addNode(g, node7, 7);
-    addNode(g, node8, 8);
-    addNode(g, node9, 9);
+    addNode(g, node0);
+    addNode(g, node1);
+    addNode(g, node2);
+    addNode(g, node3);
+    addNode(g, node4);
+    addNode(g, node5);
+    addNode(g, node6);
+    addNode(g, node7);
+    addNode(g, node8);
+    addNode(g, node9);
 
 }
 
