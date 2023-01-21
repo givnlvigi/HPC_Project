@@ -17,14 +17,14 @@ int main(int argc, char *argv[])
 
     int size = atoi(argv[1]);
     int n_threads = atoi(argv[2]);
-    int max_edges = 2;
+    int max_edges = 1;
 
     char filename[300];
 
     // printf("%s\t%s\t\t\t%s\t%s\t%s\n", "psize", "file", "deg", "offset", "size");
 
     if (n_threads == 0){
-        sprintf(filename, "SIZE%d_SEQ_INPUT", size);
+        sprintf(filename, "SIZE%d-SEQ-INPUT", size);
         // printf("%s\n", filename);
         generate_graph(size, filename, max_edges, 0, size);
         printf("Created file: %s, n_nodes: %d, max_edges: %d, start_id:%d, total_graph_nodes:%d\n", filename, size, max_edges, 0, size);
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
         // printf("\n");
     }
     else if (n_threads == 1){
-        sprintf(filename, "SIZE%d_NT1_INPUT1", size);
+        sprintf(filename, "SIZE%d-NT1-INPUT1", size);
         generate_graph(size, filename, max_edges, 0, size);
         printf("Created file: %s, n_nodes: %d, max_edges: %d, start_id:%d, total_graph_nodes:%d\n", filename, size, max_edges, 0, size);
         // printf("%d\t%s\t%d\t%d\t%d\n", size, filename, max_edges, 0, size);
@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
 
         for (int th = 1; th <= n_threads; th++)
         {
-            sprintf(filename, "SIZE%d_NT%d_INPUT%d", size, n_threads, th);
+            sprintf(filename, "SIZE%d-NT%d-INPUT%d", size, n_threads, th);
             // printf("%s\n", filename);
 
             if (th == n_threads){
@@ -61,6 +61,6 @@ int main(int argc, char *argv[])
         }
         printf("\n");
     }
-    
+
     return 0;
 }

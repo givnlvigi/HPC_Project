@@ -35,7 +35,7 @@ void makeMPIArray(SCCStack * scc, TArray*a,int rank){
         arrayAdd(a,node.components.length);
 
         arrayAdd(a,node.out_degree);
-        
+
         for(int i = 0; i < node.components.length; i++){
 
             int flag = 0;
@@ -190,6 +190,15 @@ void tree_communication(Graph *g,SCCStack * sccStack, int rank, int size, int *r
 
 
 int main(int argc, char** argv){
+
+
+    if (argc != 3){
+        fprintf(stderr, "Usage:\n\t%s [file_name] [size]", argv[0]);
+    }
+
+    char *filename = argv[1];
+    int size = atoi(argv[2]);
+
     int rank, n_ranks;
     int n_numbers = 5000000;
 
@@ -211,32 +220,57 @@ int main(int argc, char** argv){
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &n_ranks);
 
-    char file_index[2];
+    char file_index[20];
 
     sprintf(file_index, "%d", rank+1);
 
-    char filename[20] = "INPUT_FILE";
+    // char filename[20] = "INPUT_FILE";
     strcat(filename, file_index);   
+
+    printf("%s\n", filename);
     
-    //generate_graph(11, "out3", 2);
     SCCStack sccStack;
     sccStack = SCCStackCreate();
     Graph g1 = graphCreate(1);
-    // g1 = graphCreate(5);
 
-    // //generate_graph(11, "out3", 2);
-    // printf("Hi from proc: %d!\n", rank);
 
-    // printf("%s\n", filename);
+    /*------------------------------------ READ PHASE -------------------------------------------*/
+	double read_start_time = MPI_Wtime();
+    
     init_from_file(filename, &g1);
+
+	double read_end_time = MPI_Wtime();
+
     #ifdef DEBUG
     graphPrint(&g1);
     #endif
     
     SCC(&g1, &sccStack);
 
+    /*------------------------------------ EXEC OF TARJAN PHASE ----------------------------------*/
+	double tarjan_start_time = MPI_Wtime();	
     tree_communication(&g1, &sccStack, rank, n_ranks,recvcount,sendcount,recv_message);
-    
+	double tarjan_end_time = MPI_Wtime();
+
+    /*------------------------------------ WRITE PHASE -------------------------------------------*/
+	double write_start_time = MPI_Wtime();
+	double write_end_time = MPI_Wtime();
+
+
+    /*------------------------------------ MEASURING ELAPSED TIMES -------------------------------------------*/
+	double read_time = read_end_time - read_start_time;
+	double tarjan_time = tarjan_end_time - tarjan_start_time;
+	double write_time = write_end_time - write_start_time;
+
+
+    double global_read_time, global_tarjan_time, global_write_time;
+	MPI_Reduce(&read_time,&global_read_time,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
+	MPI_Reduce(&tarjan_time,&global_tarjan_time,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
+	MPI_Reduce(&write_time,&global_write_time,1,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
+
+	double global_elapsed = global_read_time + global_tarjan_time + global_write_time;
+	if(rank == 0) printf("%d,%.3f,%.3f,%.3f,%.3f\n",size, global_read_time, global_tarjan_time, global_write_time, global_elapsed);
+
     return_value = MPI_Finalize();
 
     free(recv_message);
