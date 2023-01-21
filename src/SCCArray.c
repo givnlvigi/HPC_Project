@@ -65,7 +65,6 @@ void SCCArraySet (SCCArray *a, int pos, SCCNode info) {
 void SCCArrayPrint(SCCArray *a) {
     for (int i = 0; i < a->length; ++i){
         nodeArrayPrint(&a->items[i].components);
-
     }
     printf ("\n");
 }

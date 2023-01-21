@@ -19,6 +19,7 @@ Graph graphCreate(int num_nodes);
 void addNode(Graph* g, Node v);
 void graphDestroy(Graph* g);
 void graphResize(Graph* g, int num_nodes);
+void graphPrint(Graph* g);
 
 
 #endif

@@ -160,29 +160,13 @@ void init_from_file(char* input_file, Graph* g){
         perror("Could not move the pointer to the start of the file. Aborting.");
     }
 
-
-    // creating buffer for storing line
-    // char* buffer = (char*) malloc(BUFFER_DIM);
-    // char buffer[100];
-    // if (buffer == NULL){
-    //     perror("buffer not created. Aborting.");
-    //     exit(1);
-    // }
-    
-    // reading line with fgets
-    // fgets(buffer, BUFFER_DIM, graph_file);
-
-    int graph_dim = 0; 
-
-    // input validation with sscanf
-    // sscanf(buffer, "%d", &graph_dim);
-    // printf("\nsize of buffer: %d", sizeof(buffer));
+    int graph_dim = -1; 
     fread(&graph_dim, sizeof(int), 1, graph_file);
 
     #ifdef DEBUG
     printf("Graph dim -> %d\n", graph_dim);
     #endif
-    *g = graphCreate(graph_dim);
+    *g = graphCreate(0);
     
     char *delim = " ";
     char *line; 
@@ -193,33 +177,6 @@ void init_from_file(char* input_file, Graph* g){
     int degree = 0; 
     int edge_counter = 0; 
     Node node; 
-
-
-    // while (fgets(buffer, BUFFER_DIM, graph_file)){
-    //     line = strtok(buffer, delim); // return pointer to the char of the next token
-    //     node_id = atoi(line);
-
-    //     line = strtok(NULL, delim);
-    //     index = atoi(line);
-
-    //     line = strtok(NULL, delim);
-    //     degree = atoi(line);
-
-    //     printf("node_id: %d, index: %d, degree: %d", node_id, index, degree);
-
-    //     node = node_create(node_id, degree);
-
-    //     printf(", edges: ");
-    //     edge_counter = 0; 
-    //     while ( line = strtok(NULL, delim)){
-    //         int edge = atoi(line);
-    //         node.outgoing_edges[edge_counter] = edge; 
-    //         edge_counter++; 
-    //         printf("%d ", edge);
-    //     }
-    //     addNode(g, node, index);
-    //     printf("\n");
-    // }
 
     for (int i = 0; i < graph_dim; i++)
     {

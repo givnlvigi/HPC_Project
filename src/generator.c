@@ -3,8 +3,8 @@
 
 #include "utils.h"
 
-#define NUM_NODES 10000
-#define NUM_FILE 16
+#define NUM_NODES 10
+#define NUM_FILE 1
 
 
 int main(int argc, char const *argv[])
@@ -47,7 +47,10 @@ int main(int argc, char const *argv[])
     #endif
 
 
-
+    #elif NUM_NODES == 10
+    #if NUM_FILE == 1
+    generate_graph(10, "INPUT_FILE1", 2, 0, 10);
+    #endif
 
     #elif NUM_NODES == 100000
 

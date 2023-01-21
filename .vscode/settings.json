@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "tstack.h": "c"
+        "tstack.h": "c",
+        "tarjan_sequential.h": "c"
     }
 }

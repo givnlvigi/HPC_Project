@@ -37,7 +37,24 @@ void graphResize(Graph* g, int num_nodes){
     
     if(num_nodes > g->V+C_EXP)
         g->adj = realloc(g->adj, sizeof(Node) * num_nodes);
-    g->V = num_nodes;
+    g->V = num_nodes + 1;
+}
+
+void graphPrint(Graph* g){
+    printf("Info about this graph:\n");
+    printf("minID: %d\t", g->min_ID);
+    printf("maxID: %d\t", g->max_ID);
+    printf("top: %d\t", g->top);
+    printf("V: %d\n", g->V);
+    printf("Printing graph structure...\n");
+    for(int i=0; i<g->V;i++){
+        printf("%d -----> ", g->adj[i].id);
+        for(int j=0; j<g->adj[i].degree;j++){
+            printf("%d  ",g->adj[i].outgoing_edges[j]);
+        }
+        printf("\n");
+    }
+    
 }
 
 
