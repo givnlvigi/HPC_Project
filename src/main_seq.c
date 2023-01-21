@@ -3,7 +3,6 @@
 
 #include "Tarjan.h"
 
-
 int main(int argc, char** argv){
 
     char filename[20] = "INPUT_FILE1";

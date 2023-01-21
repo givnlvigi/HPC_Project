@@ -36,7 +36,6 @@ void makeMPIArray(SCCStack * scc, TArray*a,int rank){
 
         arrayAdd(a,node.out_degree);
         
-
         for(int i = 0; i < node.components.length; i++){
 
             int flag = 0;
@@ -61,15 +60,11 @@ void makeMPIArray(SCCStack * scc, TArray*a,int rank){
             if(flag == 1){
                 arraySet(a,length_index, a->items[length_index] + len);
             }
-            
-            
         }
-
         THLNode *nodeList = node.outgoing;
         while (nodeList != NULL) {
             arrayAdd(a, nodeList->info.key);
             nodeList = nodeList->link;
-            
         }
         arraySet(a, 0, a->length);
     }
@@ -105,29 +100,21 @@ void makeSupernode(Graph* g, int *a, int rank){
         if(num_elem_scc > 1)
             new_node.scc_flag = true;
         for(i; i < index && i < n; i++){              
-
             new_node.scc_components = listInsert(new_node.scc_components, infoListCreate(a[i],0));
             //new_node.num_components++;
             updateEdges(g,a[i], id);
-            
         }
 
         
         index = i+degree;
-
         int c = 0;
         for(i; i < index && i < n; i++){        
             new_node.outgoing_edges[c++] = a[i];
         }
         new_node.graph_index = g->top;
-
-        
         addNode(g, new_node);
-        
         i--;
     }
-
-
 }
 
 
