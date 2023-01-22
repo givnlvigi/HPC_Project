@@ -85,10 +85,10 @@ def _extract(path_to_folder,plot_columns):
 			np_mean = np.mean(x_data)
 
 			#68,3% = P{ μ − 1,00 σ < X < μ + 1,00 σ }
-			# x_data = ds[(ds[col] < (mean + std)) & (ds[col] > (mean - std))][col]
-			# mean,std=stats.norm.fit(x_data)
-			# file_mean[col] = mean if np_mean == mean else np_mean
-			file_mean[col] = np_mean
+			x_data = ds[(ds[col] < (mean + std)) & (ds[col] > (mean - std))][col]
+			mean,std=stats.norm.fit(x_data)
+			file_mean[col] = mean if np_mean == mean else np_mean
+			# file_mean[col] = np_mean
 			
 			if plot_columns[col]['jpg']:
 				sns.histplot(x_data, kde=True)
